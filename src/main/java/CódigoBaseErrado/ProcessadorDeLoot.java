@@ -1,41 +1,72 @@
 package CódigoBaseErrado;
 
 class Bau {
-    public String tipo = "Lendário";
-    public double raridadeBase = 100.0;
-    public int quantidadeItens = 5;
-    public String playerEmail = "player1@valhalla.com";
+    private String id;
+    private double valorBase;
+    private int quantidadeItens;
+    private boolean isAberto;
+    private String playerEmail;
+
+    public Bau(String id, double valorBase, int quantidadeItens, String playerEmail) {
+        this.id = id;
+        this.valorBase = valorBase;
+        this.quantidadeItens = quantidadeItens;
+        this.isAberto = false;
+        this.playerEmail = playerEmail;
+    }
+
+    public String getId() { return id; }
+    public double getValorBase() { return valorBase; }
+    public int getQuantidadeItens() { return quantidadeItens; }
+    public boolean isAberto() { return isAberto; }
+    public void setAberto(boolean aberto) { isAberto = aberto; }
+    public String getPlayerEmail() { return playerEmail; }
 }
 
 public class ProcessadorDeLoot {
 
-    public void processarLoot(Bau bau) throws Exception {
-        if (bau.quantidadeItens > 50) {
-            throw new Exception("Baú suspeito! Limite de itens excedido para evitar hacks.");
-        }
+    public double processarAbertura(Bau bau) throws Exception {
 
+        if (bau.getQuantidadeItens() > 100) {
+            throw new Exception("ALERTA DE HACK: Muitos itens para um único baú!");
+        }
 
         double bonusSorte = 0.0;
-        if (bau.tipo.equals("Lendário")) {
-            bonusSorte = 50.0; // Bônus fixo
+        if (bau.getValorBase() < 500.00) {
+            bonusSorte = 50.00;
+        } else {
+            bonusSorte = 0.0;
         }
-        double taxaDropInimigo = bau.raridadeBase * 0.20; // 20% de taxa fixa
-        double valorFinalItem = bau.raridadeBase + bonusSorte + taxaDropInimigo;
 
+        double taxaServidor = bau.getValorBase() * 0.15;
+        double valorFinal = bau.getValorBase() + bonusSorte - taxaServidor;
 
-        System.out.println("LOG: Item de valor " + valorFinalItem + " salvo no Inventário SQL do Player.");
-        System.out.println("NOTIFICAÇÃO: Enviando e-mail de recompensa para " + bau.playerEmail);
+        bau.setAberto(true);
+
+        salvarNoInventarioSQL(bau, valorFinal);
+
+        notificarPlayerViaChat(bau.getPlayerEmail(), bau.getId());
+
+        return valorFinal;
+    }
+
+    private void salvarNoInventarioSQL(Bau bau, double valorFinal) {
+        System.out.println("LOG DB: Inserindo item " + bau.getId() + " com valor R$" + valorFinal + " no MySQL.");
+    }
+
+    private void notificarPlayerViaChat(String email, String idBau) {
+        System.out.println("CHAT: [SISTEMA] Player " + email + ", seu baú " + idBau + " foi aberto com sucesso!");
     }
 
     public static void main(String[] args) {
         ProcessadorDeLoot engine = new ProcessadorDeLoot();
-        Bau bauRaro = new Bau();
+        Bau bauLendario = new Bau("BAU-999", 600.00, 5, "arthas@lichking.com");
 
         try {
-            engine.processarLoot(bauRaro);
-            System.out.println("Loot processado com sucesso!");
+            double total = engine.processarAbertura(bauLendario);
+            System.out.println("Sucesso! Valor final da recompensa: R$" + total);
         } catch (Exception e) {
-            System.err.println("Erro no sistema: " + e.getMessage());
+            System.out.println("ERRO CRÍTICO NO JOGO: " + e.getMessage());
         }
     }
 }
