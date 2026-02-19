@@ -1,4 +1,4 @@
-package CódigoBaseErrado;
+package CodigoBaseErrado;
 
 class Bau {
     private String id;
@@ -51,11 +51,15 @@ public class ProcessadorDeLoot {
     }
 
     private void salvarNoInventarioSQL(Bau bau, double valorFinal) {
-        System.out.println("LOG DB: Inserindo item " + bau.getId() + " com valor R$" + valorFinal + " no MySQL.");
+        System.out.println("LOG DB: Inserindo item " +
+                bau.getId() + " com valor R$" +
+                valorFinal + " no MySQL.");
     }
 
     private void notificarPlayerViaChat(String email, String idBau) {
-        System.out.println("CHAT: [SISTEMA] Player " + email + ", seu baú " + idBau + " foi aberto com sucesso!");
+        System.out.println("CHAT: [SISTEMA] Player " +
+                email + ", seu baú " +
+                idBau + " foi aberto com sucesso!");
     }
 
     public static void main(String[] args) {
