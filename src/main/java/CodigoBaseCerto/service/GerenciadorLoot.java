@@ -1,7 +1,7 @@
-package CódigoBaseCerto.service;
+package CodigoBaseCerto.service;
 
-import CódigoBaseCerto.model.Bau;
-import CódigoBaseCerto.interfaces.*;
+import CodigoBaseCerto.model.Bau;
+import CodigoBaseCerto.interfaces.*;
 
 public class GerenciadorLoot {
     private ValidadorDeHack validador;
@@ -19,11 +19,10 @@ public class GerenciadorLoot {
 
     public void processarAbertura(Bau bau) throws Exception {
         validador.validar(bau.getQuantidadeItens());
-
         double valorFinal = calculadora.calcular(bau.getValorBase());
-
         repo.salvarNoInventario(bau, valorFinal);
-
         notificacao.enviar("Loot recebido! Valor total: " + valorFinal, bau.getPlayerEmail());
     }
 }
+
+

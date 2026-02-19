@@ -1,4 +1,4 @@
-package CódigoBaseCerto.model;
+package CodigoBaseCerto.model;
 public class Bau {
     private String id;
     private String tipo; // Ex: "Lendário", "Comum", "Épico"

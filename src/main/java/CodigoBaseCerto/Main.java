@@ -1,11 +1,11 @@
-package CódigoBaseCerto;
+package CodigoBaseCerto;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-import CódigoBaseCerto.model.Bau;
-import CódigoBaseCerto.service.*;
-import CódigoBaseCerto.strategy.CalculadoraLendaria;
-import CódigoBaseCerto.interfaces.ServicoNotificacao;
+import CodigoBaseCerto.model.Bau;
+import CodigoBaseCerto.service.*;
+import CodigoBaseCerto.strategy.CalculadoraLendaria;
+import CodigoBaseCerto.interfaces.ServicoNotificacao;
 
 public class Main {
     public static void main(String[] args) {

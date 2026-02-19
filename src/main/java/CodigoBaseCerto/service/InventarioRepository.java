@@ -1,6 +1,6 @@
-package CódigoBaseCerto.service;
+package CodigoBaseCerto.service;
 
-import CódigoBaseCerto.model.Bau;
+import CodigoBaseCerto.model.Bau;
 
 public class InventarioRepository {
     public void salvarNoInventario(Bau bau, double valorFinal) {

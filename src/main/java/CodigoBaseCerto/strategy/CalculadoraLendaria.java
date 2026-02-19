@@ -1,6 +1,6 @@
-package CódigoBaseCerto.strategy;
+package CodigoBaseCerto.strategy;
 
-import CódigoBaseCerto.interfaces.CalculadoraDeStatus;
+import CodigoBaseCerto.interfaces.CalculadoraDeStatus;
 
 public class CalculadoraLendaria implements CalculadoraDeStatus {
     @Override
